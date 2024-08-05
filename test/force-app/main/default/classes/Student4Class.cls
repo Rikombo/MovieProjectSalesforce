@@ -1,6 +1,6 @@
 public with sharing class Student4Class {
     public Student4Class() {
-        System.debug('Hello');
+        System.debug('Hello world');
 
     }
 }
