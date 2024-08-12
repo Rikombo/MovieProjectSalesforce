@@ -3,6 +3,10 @@
     {
       "path": "force-app",
       "default": true
+    },
+    {
+      "path": "themoviedb",
+      "default": false
     }
   ],
   "name": "tasks",
