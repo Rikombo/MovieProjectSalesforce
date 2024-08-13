@@ -20,4 +20,22 @@ public with sharing class TMDBApiService {
             return null;
         }
     }
+    public static tmdbGenreListResponse fetchGenres() {
+        String endpoint = 'https://api.themoviedb.org/3/genre/movie/list?language=en-US';
+        HttpRequest request = new HttpRequest();
+        request.setEndpoint(endpoint);
+        request.setMethod('GET');
+        request.setHeader('accept', 'application/json');
+        request.setHeader('Authorization', 'Bearer ' + BEARER_TOKEN);
+
+        Http http = new Http();
+        HttpResponse response = http.send(request);
+
+        if (response.getStatusCode() == 200) {
+            return (tmdbGenreListResponse) JSON.deserialize(response.getBody(), tmdbGenreListResponse.class);
+        } else {
+            System.debug('Failed to get genre list. Status: ' + response.getStatusCode() + ' Response: ' + response.getBody());
+            return null;
+        }
+    }
 }
