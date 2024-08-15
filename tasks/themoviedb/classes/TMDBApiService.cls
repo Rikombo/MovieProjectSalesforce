@@ -20,6 +20,7 @@ public with sharing class TMDBApiService {
             return null;
         }
     }
+    
     public static tmdbGenreListResponse fetchGenres() {
         String endpoint = 'https://api.themoviedb.org/3/genre/movie/list?language=en-US';
         HttpRequest request = new HttpRequest();
