@@ -36,7 +36,7 @@ public with sharing class MovieDetailsService {
                     for (String genreName : genreMap.keySet()) {
                         if (genreMap.get(genreName) == genreId) {
                             if (genreName == 'Science Fiction') {
-                                genreName = 'Science_Fiction'; // Match the API name with the picklist API name
+                                genreName = 'Science_Fiction'; 
                             }
                             genreNames.add(genreName);
                             break;
