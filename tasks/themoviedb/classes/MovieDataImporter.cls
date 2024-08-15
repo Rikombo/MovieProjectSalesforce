@@ -41,7 +41,7 @@ public with sharing class MovieDataImporter {
         List<Movie__c> moviesToInsert = new List<Movie__c>();
         List<Script__c> scriptsToInsert = new List<Script__c>();
 
-        String invalidChars = '!@#$%^&*()_+=[]{}|;:"<>,?/\\`~•§±≠≈Ωµπ∞∑∆√Üâ‰∏É‰∫∫„ÅÆ‰æç„Éè„Ç¶„É´„ÅÆÂãï„ÅèÂüé–°–æ–ª—è—Ä–∏—Å';
+        String invalidChars = '!@#$%^&*()_+=[]{}|;:"<>,?/\\`~•§±≠≈Ωµπ∞∑∆√Üâ‰∏É‰∫∫„ÅÆ‰æç„Éè„Ç¶„É´„ÅÆÂãï„ÅèÂüé–°–æ–ª—è—Ä–∏—ÅÈ¢®Êö¥';
 
         for (MovieWrapper movieData : movies) {
             String tmdbId = movieData.tmdb_id != null ? movieData.tmdb_id.trim() : null;
