@@ -1,9 +1,17 @@
 <template>
-    <lightning-card title={title}>
-        <div class="movie-card">
-            <p class="movie-rating"><strong>Rating: {rating}</strong></p>
-            <p class="movie-genre">Genre: {genre}</p>
-            <img if:true={posterUrl} src={posterUrl} alt="Movie Poster" class="movie-poster" />
+    <lightning-card title={computedTitle} class="movie-card">
+        <template if:true={isHorrorMovie}>
+            <div class="age-restriction">18+</div>
+        </template>
+        <div class="poster-container">
+            <img src={computedPosterUrl} alt="Movie Poster" class="movie-poster"/>
+        </div>
+        <div class="movie-info">
+            <div class="rating"><strong>Rating:</strong> {computedRating}</div>
+            <div class="genre"><strong>Genre:</strong> {computedGenre}</div>
+        </div>
+        <div slot="footer" class="card-footer">
+            <lightning-button label="Details" onclick={navigateToDetails} class="details-button"></lightning-button>
         </div>
     </lightning-card>
 </template>

@@ -1,29 +1,51 @@
 import { LightningElement, api, wire } from 'lwc';
 import { getRecord } from 'lightning/uiRecordApi';
-import RATING_FIELD from '@salesforce/schema/Movie__c.Rating__c';
+import { NavigationMixin } from 'lightning/navigation';
 import TITLE_FIELD from '@salesforce/schema/Movie__c.Title__c';
-import POSTER_URL_FIELD from '@salesforce/schema/Movie__c.Poster_URL__c';
 import GENRE_FIELD from '@salesforce/schema/Movie__c.Genre__c';
+import RATING_FIELD from '@salesforce/schema/Movie__c.Rating__c';
+import POSTER_URL_FIELD from '@salesforce/schema/Movie__c.Poster_URL__c';
 
-export default class MovieCard extends LightningElement {
+export default class MovieCard extends NavigationMixin(LightningElement) {
+    @api title;
+    @api genre;
+    @api rating;
+    @api posterUrl;
     @api recordId;
 
-    @wire(getRecord, { recordId: '$recordId', fields: [RATING_FIELD, TITLE_FIELD, POSTER_URL_FIELD, GENRE_FIELD] })
+    // Wire to fetch record data if recordId is provided
+    @wire(getRecord, { recordId: '$recordId', fields: [TITLE_FIELD, GENRE_FIELD, RATING_FIELD, POSTER_URL_FIELD] })
     movie;
 
-    get rating() {
-        return this.movie.data ? this.movie.data.fields.Rating__c.value : 'N/A';
+    get computedTitle() {
+        return this.recordId ? this.movie?.data?.fields?.Title__c?.value : this.title;
     }
 
-    get title() {
-        return this.movie.data ? this.movie.data.fields.Title__c.value : 'No Title';
+    get computedGenre() {
+        return this.recordId ? this.movie?.data?.fields?.Genre__c?.value : this.genre;
     }
 
-    get posterUrl() {
-        return this.movie.data ? this.movie.data.fields.Poster_URL__c.value : '';
+    get computedRating() {
+        return this.recordId ? this.movie?.data?.fields?.Rating__c?.value : this.rating;
     }
 
-    get genre() {
-        return this.movie.data ? this.movie.data.fields.Genre__c.value : '';
+    get computedPosterUrl() {
+        return this.recordId ? this.movie?.data?.fields?.Poster_URL__c?.value : this.posterUrl;
+    }
+
+    get isHorrorMovie() {
+        const genre = this.computedGenre;
+        return genre && genre.toLowerCase().includes('horror');
+    }
+
+    navigateToDetails() {
+        this[NavigationMixin.Navigate]({
+            type: 'standard__recordPage',
+            attributes: {
+                recordId: this.recordId,
+                objectApiName: 'Movie__c',
+                actionName: 'view'
+            }
+        });
     }
 }

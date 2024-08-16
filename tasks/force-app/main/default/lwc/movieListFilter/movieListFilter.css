@@ -1,0 +1,12 @@
+.filter-card {
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.filter-container {
+    display: inline-block;
+    max-width: 300px;
+}

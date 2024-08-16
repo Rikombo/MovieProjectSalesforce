@@ -1,9 +1,30 @@
-import { LightningElement } from 'lwc';
+import { LightningElement, wire, track } from 'lwc';
+import getMovies from '@salesforce/apex/MovieController.getMovies'; 
 
 export default class MovieCatalog extends LightningElement {
-    movie = {
-        Title__c: 'Inception',
-        Rating__c: 8.8,
-        Poster_URL__c: 'https://image.tmdb.org/t/p/original/pB8BM7pdSp6B6Ih7QZ4DrQ3PmJK.jpg'
-    };
+    @track movies = [];
+    @track filteredMovies = [];
+    selectedGenre = '';
+
+    @wire(getMovies)
+    wiredMovies({ error, data }) {
+        if (data) {
+            this.movies = data;
+            this.filteredMovies = data; 
+        } else if (error) {
+            console.error('Error fetching movies:', error);
+        }
+    }
+
+    handleGenreChange(event) {
+        const selectedGenre = event.detail.genre;
+
+        if (selectedGenre === '' || selectedGenre === undefined) {
+            this.filteredMovies = this.movies; 
+        } else {
+            this.filteredMovies = this.movies.filter(movie => 
+                movie.Genre__c.toLowerCase().includes(selectedGenre.toLowerCase())
+            );
+        }
+    }
 }

@@ -1,0 +1,14 @@
+<template>
+    <lightning-card title="Filter" class="filter-card">
+        <div class="filter-container">
+            <lightning-combobox 
+                name="genre" 
+                label="Genre" 
+                placeholder="Select an Option" 
+                options={genreOptions} 
+                value={selectedGenre} 
+                onchange={handleGenreChange}>
+            </lightning-combobox>
+        </div>
+    </lightning-card>
+</template>
