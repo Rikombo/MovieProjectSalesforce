@@ -7,12 +7,6 @@ public with sharing class MovieDataImporter {
         importMovies(jsonMovies);
     }
 
-    public static void importMoviesFromStaticResource(String resourceName) {
-        StaticResource movieDataResource = [SELECT Body FROM StaticResource WHERE Name = :resourceName LIMIT 1];
-        String jsonMovies = movieDataResource.Body.toString();
-        importMovies(jsonMovies);
-    }
-
     public static void importMovies(String jsonMovies) {
         List<MovieWrapper> movies = (List<MovieWrapper>) JSON.deserialize(jsonMovies, List<MovieWrapper>.class);
 
@@ -57,26 +51,26 @@ public with sharing class MovieDataImporter {
                     break;
                 }
             }
-            
+
             if (!isValidTitle) {
-                continue; 
+                continue;
             }
 
             String firstGenre = '';
             if (movieData.genre != null) {
                 List<String> genreList = movieData.genre.split(';');
                 if (!genreList.isEmpty()) {
-                    firstGenre = genreList[0].trim(); 
+                    firstGenre = genreList[0].trim();
                 }
             }
 
             Set<String> validGenres = new Set<String>();
             for (Schema.PicklistEntry entry : Script__c.Genre__c.getDescribe().getPicklistValues()) {
-                validGenres.add(entry.getValue().toLowerCase()); 
+                validGenres.add(entry.getValue().toLowerCase());
             }
 
             if (!validGenres.contains(firstGenre.toLowerCase())) {
-                continue; 
+                continue;
             }
 
             Script__c scriptRecord = null;
@@ -85,9 +79,9 @@ public with sharing class MovieDataImporter {
                 if (!existingScriptsMap.containsKey(movieData.script.id)) {
                     scriptRecord = new Script__c();
                     scriptRecord.LegacyId__c = movieData.script.id;
-                    scriptRecord.Title__c = movieData.name;
+                    scriptRecord.Title__c = movieData.script.name;  
                     scriptRecord.Description__c = movieData.script.description;
-                    scriptRecord.Genre__c = firstGenre; 
+                    scriptRecord.Genre__c = firstGenre;
                     scriptsToInsert.add(scriptRecord);
                 } else {
                     scriptRecord = existingScriptsMap.get(movieData.script.id);
@@ -96,7 +90,7 @@ public with sharing class MovieDataImporter {
 
             Movie__c newMovie = new Movie__c();
             newMovie.LegacyId__c = movieData.id;
-            newMovie.Title__c = movieData.name;
+            newMovie.Title__c = movieData.name;  
             newMovie.TMDB_ID__c = tmdbId;
             newMovie.Genre__c = movieData.genre;
             newMovie.Rating__c = movieData.rating;
@@ -131,6 +125,9 @@ public with sharing class MovieDataImporter {
         if (!moviesToInsert.isEmpty()) {
             insert moviesToInsert;
         }
+        System.debug('Number of movies inserted: ' + moviesToInsert.size());
+        System.debug('Movies inserted: ' + moviesToInsert);
+        System.debug('Number of scripts inserted: ' + scriptsToInsert.size());
     }
 
     public class MovieWrapper {
@@ -151,4 +148,6 @@ public with sharing class MovieDataImporter {
         public String name;
         public String description;
     }
+
+    
 }
