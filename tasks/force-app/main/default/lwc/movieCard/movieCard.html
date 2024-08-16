@@ -1,0 +1,9 @@
+<template>
+    <lightning-card title={title}>
+        <div class="movie-card">
+            <p class="movie-rating"><strong>Rating: {rating}</strong></p>
+            <p class="movie-genre">Genre: {genre}</p>
+            <img if:true={posterUrl} src={posterUrl} alt="Movie Poster" class="movie-poster" />
+        </div>
+    </lightning-card>
+</template>

@@ -5,7 +5,7 @@ public with sharing class MovieSyncBatch implements Database.Batchable<SObject>,
     public Database.QueryLocator start(Database.BatchableContext BC) {
         Date oneMonthAgo = Date.today().addMonths(-1);
         return Database.getQueryLocator([
-            SELECT Id, TMDB_ID__c 
+            SELECT Id, TMDB_ID__c, Poster_URL__c
             FROM Movie__c 
             WHERE (TMDBSyncDate__c = NULL OR TMDBSyncDate__c < :oneMonthAgo) 
             AND TMDB_ID__c != NULL
@@ -22,6 +22,14 @@ public with sharing class MovieSyncBatch implements Database.Batchable<SObject>,
                 movie.Revenue__c = (Decimal) movieDetails.get('revenue');
                 movie.Rating__c = (Decimal) movieDetails.get('vote_average');
                 movie.TMDBSyncDate__c = Date.today(); 
+
+                
+                if (String.isEmpty(movie.Poster_URL__c)) {
+                    String posterPath = (String) movieDetails.get('poster_path');
+                    if (posterPath != null) {
+                        movie.Poster_URL__c = 'https://image.tmdb.org/t/p/original' + posterPath;
+                    }
+                }
 
                 moviesToUpdate.add(movie);
                 recordsProcessed++;

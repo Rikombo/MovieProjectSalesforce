@@ -20,8 +20,13 @@ public with sharing class MovieDetailsService {
             movie.Description__c = (String) movieDetails.get('overview');
             movie.Revenue__c = (Decimal) movieDetails.get('revenue');
             movie.Rating__c = (Decimal) movieDetails.get('vote_average');
-            movie.Poster_URL__c = (String) movieDetails.get('poster_path');
             movie.Budget__c = (Decimal) movieDetails.get('budget');
+
+            String posterPath = (String) movieDetails.get('poster_path');
+            if (posterPath != null) {
+                movie.Poster_URL__c = 'https://image.tmdb.org/t/p/original' + posterPath;
+            }
+            
     
             // Handle genre mapping
             List<Object> genreList = (List<Object>) movieDetails.get('genres');

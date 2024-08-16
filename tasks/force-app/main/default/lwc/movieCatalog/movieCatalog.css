@@ -1,0 +1,11 @@
+.slds-card {
+    background-color: #f3f2f2; /* Light grey to match LDS cards */
+    padding: 1rem; /* Adjust padding */
+    margin-bottom: 1rem; /* Space between cards */
+}
+
+.movie-poster {
+    width: 100%;
+    height: auto;
+    margin-bottom: 1rem;
+}
