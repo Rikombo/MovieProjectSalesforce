@@ -7,10 +7,10 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    width: 250px; /* Fixed width */
-    height: auto; /* Height will adjust based on content */
+    width: 250px; 
+    height: auto; 
     transition: transform 0.2s, box-shadow 0.2s;
-    padding: 10px; /* Add padding for a cleaner look */
+    padding: 10px; 
     position: relative;
 }
 
@@ -36,9 +36,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 300px; /* Fixed height for poster */
+    height: 300px;
     overflow: hidden;
-    margin-bottom: 15px; /* Space between image and text content */
+    margin-bottom: 15px;
 }
 
 .movie-poster {
@@ -49,15 +49,15 @@
 }
 
 .movie-title {
-    font-size: 1rem; /* Smaller font size */
-    font-weight: bold; /* Bold title */
-    text-align: left; /* Align text to the left */
-    margin-bottom: 5px; /* Space below the title */
+    font-size: 1rem; 
+    font-weight: bold; 
+    text-align: left;
+    margin-bottom: 5px; 
 }
 
 .movie-info {
-    text-align: left; /* Align text to the left */
-    margin-bottom: 15px; /* Space between text and the button */
+    text-align: left; 
+    margin-bottom: 15px;
 }
 
 .rating, .genre {
@@ -65,18 +65,18 @@
 }
 
 .genre {
-    font-size: 0.875rem; /* Slightly smaller font for genres */
-    color: #666; /* Grey color for genres */
-    white-space: normal; /* Allows text to wrap to the next line */
-    word-wrap: break-word; /* Breaks long words if necessary */
+    font-size: 0.875rem;
+    color: #666; 
+    white-space: normal; 
+    word-wrap: break-word; 
 }
 
 
 .card-footer {
     display: flex;
-    justify-content: center; /* Center the button horizontally */
+    justify-content: center; 
     padding: 0;
-    margin-top: auto; /* Push the button to the bottom */
+    margin-top: auto;
 }
 
 .details-button {
@@ -84,9 +84,10 @@
     color: white;
     border: none;
     padding: 8px 12px;
-    border-radius: 5px; /* Rounded corners for the button */
+    border-radius: 5px; 
     cursor: pointer;
     font-size: 0.875rem;
-    text-align: center; /* Center the text within the button */
+    text-align: center; 
 }
+
 

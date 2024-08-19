@@ -9,7 +9,7 @@ export default class MovieListFilter extends LightningElement {
     wiredGenres({ error, data }) {
         if (data) {
             this.genreOptions = data.map(genre => ({
-                label: genre.replace(/_/g, ' '), // Replace underscores with spaces
+                label: genre.replace(/_/g, ' '), 
                 value: genre
             }));
         } else if (error) {
