@@ -1,35 +1,17 @@
 .movie-card {
     border: 1px solid #ddd;
-    border-radius: 8px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
     overflow: hidden;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
-
-.poster-container {
+    background-color: white;
+    position: relative;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 10px 0;
-}
-
-.movie-poster {
-    max-width: 100%;
-    height: auto;
-    border-radius: 5px;
-}
-
-.movie-info {
-    padding: 10px;
-    text-align: center;
-}
-
-.rating, .genre {
-    margin-bottom: 5px;
-}
-
-.genre {
-    font-weight: bold;
+    flex-direction: column;
+    width: 250px; /* Fixed width */
+    height: auto; /* Height will adjust based on content */
+    transition: transform 0.2s, box-shadow 0.2s;
+    padding: 10px; /* Add padding for a cleaner look */
+    position: relative;
 }
 
 .age-restriction {
@@ -38,18 +20,73 @@
     right: 10px;
     background-color: red;
     color: white;
-    padding: 2px 5px;
+    padding: 5px 8px;
     border-radius: 3px;
     font-weight: bold;
+    font-size: 0.875rem;
+    z-index: 1;
 }
+
+.movie-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.poster-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px; /* Fixed height for poster */
+    overflow: hidden;
+    margin-bottom: 15px; /* Space between image and text content */
+}
+
+.movie-poster {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.movie-title {
+    font-size: 1rem; /* Smaller font size */
+    font-weight: bold; /* Bold title */
+    text-align: left; /* Align text to the left */
+    margin-bottom: 5px; /* Space below the title */
+}
+
+.movie-info {
+    text-align: left; /* Align text to the left */
+    margin-bottom: 15px; /* Space between text and the button */
+}
+
+.rating, .genre {
+    margin-bottom: 5px;
+}
+
+.genre {
+    font-size: 0.875rem; /* Slightly smaller font for genres */
+    color: #666; /* Grey color for genres */
+    white-space: normal; /* Allows text to wrap to the next line */
+    word-wrap: break-word; /* Breaks long words if necessary */
+}
+
 
 .card-footer {
     display: flex;
-    justify-content: center;
+    justify-content: center; /* Center the button horizontally */
+    padding: 0;
+    margin-top: auto; /* Push the button to the bottom */
 }
 
 .details-button {
-    padding: 0.5rem 1rem;
-    border-radius: 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px; /* Rounded corners for the button */
+    cursor: pointer;
     font-size: 0.875rem;
+    text-align: center; /* Center the text within the button */
 }
+

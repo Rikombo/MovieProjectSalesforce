@@ -13,7 +13,6 @@ export default class MovieCard extends NavigationMixin(LightningElement) {
     @api posterUrl;
     @api recordId;
 
-    // Wire to fetch record data if recordId is provided
     @wire(getRecord, { recordId: '$recordId', fields: [TITLE_FIELD, GENRE_FIELD, RATING_FIELD, POSTER_URL_FIELD] })
     movie;
 
@@ -22,7 +21,8 @@ export default class MovieCard extends NavigationMixin(LightningElement) {
     }
 
     get computedGenre() {
-        return this.recordId ? this.movie?.data?.fields?.Genre__c?.value : this.genre;
+        const genreStr = this.recordId ? this.movie?.data?.fields?.Genre__c?.value : this.genre;
+        return genreStr ? genreStr.split(';').join(', ') : ''; // Replace semicolons with commas
     }
 
     get computedRating() {

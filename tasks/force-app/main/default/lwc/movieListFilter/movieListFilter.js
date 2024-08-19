@@ -1,15 +1,15 @@
-import { LightningElement, wire } from 'lwc';
-import getGenres from '@salesforce/apex/MovieController.getGenres'; 
+import { LightningElement, api, wire } from 'lwc';
+import getGenres from '@salesforce/apex/MovieController.getGenres';
 
 export default class MovieListFilter extends LightningElement {
-    selectedGenre = '';
+    @api selectedGenre = '';
     genreOptions = [];
 
     @wire(getGenres)
     wiredGenres({ error, data }) {
         if (data) {
             this.genreOptions = data.map(genre => ({
-                label: genre,
+                label: genre.replace(/_/g, ' '), // Replace underscores with spaces
                 value: genre
             }));
         } else if (error) {

@@ -1,30 +1,35 @@
-import { LightningElement, wire, track } from 'lwc';
-import getMovies from '@salesforce/apex/MovieController.getMovies'; 
+import { LightningElement, wire, api } from 'lwc';
+import getMovies from '@salesforce/apex/MovieController.getMovies';
 
 export default class MovieCatalog extends LightningElement {
-    @track movies = [];
-    @track filteredMovies = [];
-    selectedGenre = '';
+    @api selectedGenre = '';
+    movies = [];
+    filteredMovies = [];
+    limitSize = 100; // Increase the limit size for more movies
 
-    @wire(getMovies)
+    @wire(getMovies, { genre: '$selectedGenre', limitSize: '$limitSize' })
     wiredMovies({ error, data }) {
         if (data) {
+            console.log('Fetched movies:', data);
             this.movies = data;
-            this.filteredMovies = data; 
+            this.filterMovies();
         } else if (error) {
             console.error('Error fetching movies:', error);
         }
     }
+    
 
-    handleGenreChange(event) {
-        const selectedGenre = event.detail.genre;
-
-        if (selectedGenre === '' || selectedGenre === undefined) {
-            this.filteredMovies = this.movies; 
+    @api
+    filterMovies() {
+        if (this.selectedGenre && this.selectedGenre !== 'All') {
+            this.filteredMovies = this.movies.filter(movie => {
+                const genres = movie.Genre__c.split(';').map(genre => genre.trim().toLowerCase());
+                return genres.includes(this.selectedGenre.toLowerCase());
+            });
         } else {
-            this.filteredMovies = this.movies.filter(movie => 
-                movie.Genre__c.toLowerCase().includes(selectedGenre.toLowerCase())
-            );
+            this.filteredMovies = this.movies;
         }
+        console.log('Filtered movies:', this.filteredMovies);
     }
+    
 }

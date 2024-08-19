@@ -1,14 +1,17 @@
-.filter-layout-item {
-    max-width: 600px; /* Ensure the filter isn't too wide */
-    margin: 0 auto; /* Center the filter */
-}
-
-.movie-layout {
-    justify-content: space-around; /* Add spacing between items */
-}
-
-.movie-layout-item {
-    padding: 10px;
-    display: flex;
+.movie-catalog-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Auto-fit with a minimum width of 250px */
+    gap: 20px; /* Space between movie cards */
+    padding: 20px;
+    justify-items: center;
     justify-content: center;
+}
+
+
+
+@media (max-width: 768px) {
+    .movie-card {
+        width: 100%;
+        margin-bottom: 20px;
+    }
 }
