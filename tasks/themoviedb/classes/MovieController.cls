@@ -1,16 +1,10 @@
 public with sharing class MovieController {
     @AuraEnabled(cacheable=true)
     public static List<Movie__c> getMovies(String genre, Integer limitSize) {
-        if (genre == 'All' || genre == null || genre == '') {
-            return [SELECT Id, Title__c, Genre__c, Rating__c, Poster_URL__c 
-                    FROM Movie__c 
-                    LIMIT :limitSize];
-        } else {
-            return [SELECT Id, Title__c, Genre__c, Rating__c, Poster_URL__c 
-                    FROM Movie__c 
-                    WHERE Genre__c INCLUDES (:genre)
-                    LIMIT :limitSize];
-        }
+        String genreCondition = genre != 'All' ? '%' + genre + '%' : '%';
+        String query = 'SELECT Id, Title__c, Genre__c, Rating__c, Poster_URL__c ' +
+                       'FROM Movie__c WHERE Genre__c INCLUDES (:genreCondition) LIMIT :limitSize';
+        return Database.query(query);
     }
 
     @AuraEnabled(cacheable=true)

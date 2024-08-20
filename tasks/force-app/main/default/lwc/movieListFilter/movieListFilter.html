@@ -1,14 +1,31 @@
 <template>
-    <lightning-card title="Filter" class="filter-card">
-        <div class="filter-container">
-            <lightning-combobox 
-                name="genre" 
-                label="Genre" 
-                placeholder="Select a Genre" 
-                options={genreOptions} 
-                value={selectedGenre} 
-                onchange={handleGenreChange}>
-            </lightning-combobox>
-        </div>
-    </lightning-card>
+    <div class="filter-container">
+        <!-- Genre Selection -->
+        <lightning-combobox 
+            class="genre-select"
+            name="genre" 
+            label="Genre" 
+            placeholder="Select a Genre" 
+            options={genreOptions} 
+            value={selectedGenre} 
+            onchange={handleGenreChange}>
+        </lightning-combobox>
+
+        <!-- Number of Movies Input -->
+        <lightning-input 
+            class="record-input"
+            label="Number of Movies" 
+            type="number" 
+            min="1" 
+            value={selectedLimit} 
+            onchange={handleLimitChange}>
+        </lightning-input>
+
+        <!-- Filter Button -->
+        <lightning-button 
+            label="Filter" 
+            class="filter-button" 
+            onclick={handleFilterClick}>
+        </lightning-button>
+    </div>
 </template>

@@ -1,17 +1,40 @@
 .movie-catalog-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Auto-fit with a minimum width of 250px */
-    gap: 20px; /* Space between movie cards */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+    gap: 20px;
     padding: 20px;
     justify-items: center;
     justify-content: center;
 }
 
+.pagination-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}
 
+.pagination-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    margin: 0 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
 
-@media (max-width: 768px) {
-    .movie-card {
-        width: 100%;
-        margin-bottom: 20px;
-    }
+.pagination-button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+.pagination-button:hover:not(:disabled) {
+    background-color: #0056b3;
+}
+
+.page-info {
+    font-size: 1rem;
+    color: #333;
 }

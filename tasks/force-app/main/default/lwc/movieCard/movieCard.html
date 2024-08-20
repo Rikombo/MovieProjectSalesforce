@@ -1,15 +1,16 @@
 <template>
     <div class="movie-card">
-        <template if:true={isHorrorMovie}>
-            <div class="age-restriction">18+</div>
-        </template>
-        <div class="movie-info">
-            <div class="movie-title">{computedTitle}</div>
-            <div class="rating"><strong>Rating:</strong> {computedRating}</div>
-            <div class="genre"><strong>Genre:</strong> {computedGenre}</div>
-        </div>
         <div class="poster-container">
+            <!-- 18+ Label -->
+            <template if:true={isHorrorMovie}>
+                <div class="age-restriction">18+</div>
+            </template>
             <img src={computedPosterUrl} alt="Movie Poster" class="movie-poster" />
+        </div>
+        <div class="movie-info">
+            <h2 class="movie-title">{computedTitle}</h2>
+            <p class="movie-genre">{computedGenre}</p>
+            <p class="movie-rating">Rating: {computedRating}</p>
         </div>
         <div class="card-footer">
             <button class="details-button" onclick={navigateToDetails}>Details</button>

@@ -1,13 +1,28 @@
-.filter-card {
-    border: 1px solid #ddd;
-    padding: 10px;
+.filter-container {
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: white;
     border-radius: 8px;
-    margin-bottom: 10px;
-    text-align: center;
-    width: 100%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    gap: 20px;
 }
 
-.filter-container {
-    display: inline-block;
-    max-width: 300px;
+.genre-select {
+    flex: 1; /* Takes up remaining space */
+}
+
+.record-input {
+    width: 150px;
+}
+
+.filter-button {
+    margin-top: 25px;
+    color: blue;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.filter-button:hover {
+    background-color: #0056b3;
 }

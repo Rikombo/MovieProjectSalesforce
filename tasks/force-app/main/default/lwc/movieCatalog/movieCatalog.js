@@ -1,11 +1,15 @@
-import { LightningElement, wire, api } from 'lwc';
+import { LightningElement, wire, api, track } from 'lwc';
 import getMovies from '@salesforce/apex/MovieController.getMovies';
 
 export default class MovieCatalog extends LightningElement {
     @api selectedGenre = '';
+    @api limitSize = 10; // Default to 10 records
     movies = [];
     filteredMovies = [];
-    limitSize = 10; 
+    paginatedMovies = [];
+    @track currentPage = 1;
+    @track totalPages = 1;
+    moviesPerPage = 10; // Number of movies per page
 
     @wire(getMovies, { genre: '$selectedGenre', limitSize: '$limitSize' })
     wiredMovies({ error, data }) {
@@ -17,7 +21,6 @@ export default class MovieCatalog extends LightningElement {
             console.error('Error fetching movies:', error);
         }
     }
-    
 
     @api
     filterMovies() {
@@ -29,7 +32,41 @@ export default class MovieCatalog extends LightningElement {
         } else {
             this.filteredMovies = this.movies;
         }
-        console.log('Filtered movies:', this.filteredMovies);
+        this.setupPagination();
     }
-    
+
+    setupPagination() {
+        this.totalPages = Math.ceil(this.filteredMovies.length / this.moviesPerPage);
+        this.currentPage = 1;
+        this.updatePaginatedMovies();
+    }
+
+    updatePaginatedMovies() {
+        const startIndex = (this.currentPage - 1) * this.moviesPerPage;
+        const endIndex = this.currentPage * this.moviesPerPage;
+        this.paginatedMovies = this.filteredMovies.slice(startIndex, endIndex);
+        console.log('Paginated Movies:', this.paginatedMovies);
+    }
+
+    handleNextPage() {
+        if (this.currentPage < this.totalPages) {
+            this.currentPage += 1;
+            this.updatePaginatedMovies();
+        }
+    }
+
+    handlePreviousPage() {
+        if (this.currentPage > 1) {
+            this.currentPage -= 1;
+            this.updatePaginatedMovies();
+        }
+    }
+
+    get isPreviousDisabled() {
+        return this.currentPage === 1;
+    }
+
+    get isNextDisabled() {
+        return this.currentPage === this.totalPages;
+    }
 }
