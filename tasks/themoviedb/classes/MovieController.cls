@@ -1,9 +1,14 @@
 public with sharing class MovieController {
     @AuraEnabled(cacheable=true)
     public static List<Movie__c> getMovies(String genre, Integer limitSize) {
-        String genreCondition = genre != 'All' ? '%' + genre + '%' : '%';
-        String query = 'SELECT Id, Title__c, Genre__c, Rating__c, Poster_URL__c ' +
-                       'FROM Movie__c WHERE Genre__c INCLUDES (:genreCondition) LIMIT :limitSize';
+        String query = 'SELECT Id, Title__c, Genre__c, Rating__c, Poster_URL__c FROM Movie__c';
+        
+        // Use INCLUDES for filtering by multi-select picklist
+        if (genre != null && genre != 'All') {
+            query += ' WHERE Genre__c INCLUDES (:genre)';
+        }
+
+        query += ' LIMIT :limitSize';
         return Database.query(query);
     }
 
