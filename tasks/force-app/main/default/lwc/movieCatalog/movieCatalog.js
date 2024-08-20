@@ -5,7 +5,7 @@ export default class MovieCatalog extends LightningElement {
     @api selectedGenre = '';
     movies = [];
     filteredMovies = [];
-    limitSize = 100; // Increase the limit size for more movies
+    limitSize = 10; 
 
     @wire(getMovies, { genre: '$selectedGenre', limitSize: '$limitSize' })
     wiredMovies({ error, data }) {
