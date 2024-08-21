@@ -1,5 +1,7 @@
 public with sharing class MovieDataImporter {
 
+    
+
     @AuraEnabled(cacheable=true)
     public static List<String> getExistingMovieIds() {
         List<String> tmdbIds = new List<String>();
@@ -187,5 +189,35 @@ public with sharing class MovieDataImporter {
         public String description;
     }
 
+    @AuraEnabled
+    public static String importMoviesAndSync(String jsonMovies) {
+        // Import the movies using the existing importMovies method
+        importMovies(jsonMovies);
+        
+        // Call the batch class to sync the movies after importing
+        MovieSyncBatch movieSyncBatch = new MovieSyncBatch();
+        Database.executeBatch(movieSyncBatch);
+
+        return 'Movies imported and sync started successfully';
+    }
+
     
+
+    @AuraEnabled
+    public static String importMoviesFromFile(String contentDocumentId) {
+        // Retrieve the file content using ContentDocumentId
+        ContentVersion contentVersion = [
+            SELECT VersionData FROM ContentVersion 
+            WHERE ContentDocumentId = :contentDocumentId LIMIT 1
+        ];
+        Blob jsonBlob = contentVersion.VersionData;
+        
+        // Convert the Blob to a string
+        String jsonContent = jsonBlob.toString();
+    
+        // Call the existing importMovies method
+        importMovies(jsonContent);
+    
+        return 'Movies successfully imported';
+    }
 }

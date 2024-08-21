@@ -1,5 +1,5 @@
 public with sharing class MovieTriggerHandler {
-    private static final Integer RECORD_THRESHOLD = 5;
+    private static final Integer RECORD_THRESHOLD = 200;
 
     public static void handleBeforeInsertOrUpdate(Map<Id, Movie__c> oldMap, List<Movie__c> newMovies) {
         if (newMovies.size() > RECORD_THRESHOLD) {
