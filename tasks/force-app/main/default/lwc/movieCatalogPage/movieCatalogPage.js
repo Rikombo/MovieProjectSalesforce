@@ -2,11 +2,11 @@ import { LightningElement, track } from 'lwc';
 
 export default class MovieCatalogPage extends LightningElement {
     @track selectedGenre = 'All';
-    @track selectedLimit = 10; // Default to 10 records
+    @track selectedLimit = 10;
 
     handleFilter(event) {
-        this.selectedGenre = event.detail.genre;
-        this.selectedLimit = event.detail.limit;
+        this.selectedGenre = event.detail.genre || 'All';  // Ensure genre fallback
+        this.selectedLimit = event.detail.limit || 10;     // Ensure limit fallback
 
         const movieCatalog = this.template.querySelector('c-movie-catalog');
         if (movieCatalog) {

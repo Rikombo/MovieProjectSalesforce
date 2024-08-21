@@ -22,4 +22,5 @@ public with sharing class MovieController {
         }
         return new List<String>(genres);
     }
+
 }

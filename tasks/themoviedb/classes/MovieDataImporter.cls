@@ -1,5 +1,43 @@
 public with sharing class MovieDataImporter {
 
+    @AuraEnabled(cacheable=true)
+    public static List<String> getExistingMovieIds() {
+        List<String> tmdbIds = new List<String>();
+
+        for (Movie__c movie : [SELECT TMDB_ID__c FROM Movie__c WHERE TMDB_ID__c != null]) {
+            tmdbIds.add(movie.TMDB_ID__c);
+        }
+
+        return tmdbIds;
+    }
+
+    @AuraEnabled
+    public static Boolean doesMovieExist(String tmdbId) {
+        Integer count = [SELECT count() FROM Movie__c WHERE TMDB_ID__c = :tmdbId];
+        return count > 0;
+    }
+
+    @AuraEnabled
+    public static void createMovie(String tmdbId) {
+        if (tmdbId == null || tmdbId.trim() == '') {
+            throw new AuraHandledException('TMDB ID cannot be null or empty.');
+        }
+
+        Boolean movieExists = doesMovieExist(tmdbId);
+        if (movieExists) {
+            throw new AuraHandledException('This movie already exists in the database.');
+        }
+
+        Movie__c newMovie = new Movie__c();
+        newMovie.TMDB_ID__c = tmdbId;
+
+        try {
+            insert newMovie;
+        } catch (Exception e) {
+            throw new AuraHandledException('Failed to create new movie record: ' + e.getMessage());
+        }
+    }
+
     public static void importAllMovies(String staticResourceName) {
         StaticResource movieDataResource = [SELECT Body FROM StaticResource WHERE Name = :staticResourceName LIMIT 1];
         String jsonMovies = movieDataResource.Body.toString();
