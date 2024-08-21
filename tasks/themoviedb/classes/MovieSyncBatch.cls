@@ -1,7 +1,7 @@
 public with sharing class MovieSyncBatch implements Database.Batchable<SObject>, Database.Stateful, Database.AllowsCallouts {
 
     private Integer recordsProcessed = 0;
-
+    
     public Database.QueryLocator start(Database.BatchableContext BC) {
         Date oneMonthAgo = Date.today().addMonths(-1);
         return Database.getQueryLocator([
