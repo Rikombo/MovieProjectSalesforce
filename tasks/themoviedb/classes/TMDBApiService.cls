@@ -82,7 +82,7 @@ public with sharing class TMDBApiService {
                 }
     
                 // If genreNames is empty, assign 'No genre', otherwise join the genres
-                String genres = genreNames.isEmpty() ? 'No genre' : String.join(genreNames, ';');
+                String genres = genreNames.isEmpty() ? 'No genre' : String.join(genreNames, ', ');
     
                 movies.add(new Map<String, Object>{
                     'id' => movie.get('id'),
