@@ -80,30 +80,38 @@ public with sharing class MovieDataImporter {
 
     public static void importMovies(String jsonMovies) {
         List<MovieWrapper> movies = (List<MovieWrapper>) JSON.deserialize(jsonMovies, List<MovieWrapper>.class);
-
+    
         List<Movie__c> moviesToInsert = new List<Movie__c>();
-
+    
         for (MovieWrapper movieData : movies) {
+            if (movieData.genre == '[]' || String.isBlank(movieData.genre)) {
+                System.debug('Skipping movie with empty genre: ' + movieData.name);
+                continue; 
+            }
+    
             Movie__c newMovie = new Movie__c();
             newMovie.LegacyId__c = movieData.id;
             newMovie.Title__c = movieData.name;  
             newMovie.TMDB_ID__c = movieData.tmdb_id;
-            newMovie.Genre__c = movieData.genre != null ? movieData.genre : 'No genre';
+            
+            newMovie.Genre__c = movieData.genre;
             newMovie.Rating__c = movieData.rating != null ? movieData.rating : 0;
             newMovie.Budget__c = movieData.budget != null ? movieData.budget : 0;
             newMovie.Revenue__c = movieData.revenue != null ? movieData.revenue : 0;
             newMovie.Description__c = movieData.script != null ? movieData.script.description : '';
-
+    
             moviesToInsert.add(newMovie);
         }
-
+    
         if (!moviesToInsert.isEmpty()) {
             insert moviesToInsert;
         }
+        
         MovieSyncBatch movieSyncBatch = new MovieSyncBatch();
         Database.executeBatch(movieSyncBatch, 100);
         System.debug('Number of movies inserted: ' + moviesToInsert.size());
     }
+    
 
     public class MovieWrapper {
         public String id;

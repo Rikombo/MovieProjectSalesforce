@@ -22,7 +22,7 @@ export default class MovieCard extends NavigationMixin(LightningElement) {
 
     get computedGenre() {
         const genreStr = this.recordId ? this.movie?.data?.fields?.Genre__c?.value : this.genre;
-        return genreStr ? genreStr.split(';').join(', ') : ''; // Replace semicolons with commas
+        return genreStr ? genreStr.split(';').map(g => g.replace(/_/g, ' ')).join(', ') : ''; 
     }
 
     get computedRating() {
