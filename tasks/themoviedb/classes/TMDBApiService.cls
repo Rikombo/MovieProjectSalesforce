@@ -44,8 +44,7 @@ public with sharing class TMDBApiService {
         }
     }
 
-// Searches for movies by title
-@AuraEnabled(cacheable=true)
+    @AuraEnabled(cacheable=true)
     public static List<Map<String, Object>> searchMovies(String title) {
         String endpoint = SEARCH_URL + '?query=' + EncodingUtil.urlEncode(title, 'UTF-8') + '&include_adult=false&language=en-US&page=1';
         HttpRequest request = new HttpRequest();
@@ -53,23 +52,23 @@ public with sharing class TMDBApiService {
         request.setMethod('GET');
         request.setHeader('accept', 'application/json');
         request.setHeader('Authorization', 'Bearer ' + BEARER_TOKEN);
-
+    
         Http http = new Http();
         HttpResponse response = http.send(request);
-
+    
         if (response.getStatusCode() == 200) {
             Map<String, Object> result = (Map<String, Object>) JSON.deserializeUntyped(response.getBody());
             List<Object> moviesList = (List<Object>) result.get('results');
             List<Map<String, Object>> movies = new List<Map<String, Object>>();
             Values values = new Values(); 
             Map<String, Integer> genreMap = values.genreIdByName;
-
+    
             for (Object movieObj : moviesList) {
                 Map<String, Object> movie = (Map<String, Object>) movieObj;
-
+    
                 String posterPath = (String) movie.get('poster_path');
                 String posterUrl = posterPath != null ? 'https://image.tmdb.org/t/p/original' + posterPath : null;
-
+    
                 List<Object> genreIds = (List<Object>) movie.get('genre_ids');
                 List<String> genreNames = new List<String>();
                 for (Object genreIdObj : genreIds) {
@@ -81,22 +80,26 @@ public with sharing class TMDBApiService {
                         }
                     }
                 }
-
+    
+                // If genreNames is empty, assign 'No genre', otherwise join the genres
+                String genres = genreNames.isEmpty() ? 'No genre' : String.join(genreNames, ';');
+    
                 movies.add(new Map<String, Object>{
                     'id' => movie.get('id'),
                     'title' => movie.get('title'),
                     'overview' => movie.get('overview'),
                     'rating' => movie.get('vote_average'),
                     'posterUrl' => posterUrl,
-                    'genres' => String.join(genreNames, ';')
+                    'genre' => genres
                 });
             }
-
+    
             return movies;
         } else {
             throw new AuraHandledException('Failed to fetch movies from TMDB: ' + response.getStatusCode());
         }
     }
+    
 
 
     

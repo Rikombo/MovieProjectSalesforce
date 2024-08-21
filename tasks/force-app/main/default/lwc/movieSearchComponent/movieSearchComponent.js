@@ -37,20 +37,22 @@ export default class MovieSearchComponent extends LightningElement {
             })
             .then(moviesFromApi => {
                 console.log('Movies from API:', moviesFromApi);
-                this.movies = moviesFromApi.map(movie => {
-                    // Set a default value for genre if it is empty
-                    const genre = movie.genre && movie.genre.trim() !== '' ? movie.genre : 'No genre';
-    
-                    return {
-                        ...movie,
-                        genre,  // Use the default value if the genre is empty
-                        isOpen: false,
-                        statusMessage: '',
-                        statusClass: '',
-                        existsInDb: this.existingMovieTitles.has(movie.title.toLowerCase()),
-                        accordionIconClass: 'accordion-icon'
-                    };
-                });
+
+                // Skip the first movie in the list
+                const moviesToDisplay = moviesFromApi.slice(1);
+
+                this.movies = moviesToDisplay
+                    .filter(movie => movie.genre && movie.genre.trim() !== '' && movie.genre !== '[]') // Skip movies without a valid genre
+                    .map(movie => {
+                        return {
+                            ...movie,
+                            isOpen: false,
+                            statusMessage: '',
+                            statusClass: '',
+                            existsInDb: this.existingMovieTitles.has(movie.title.toLowerCase()),
+                            accordionIconClass: 'accordion-icon'
+                        };
+                    });
     
                 this.movies = this.movies.map(movie => {
                     if (movie.existsInDb) {
