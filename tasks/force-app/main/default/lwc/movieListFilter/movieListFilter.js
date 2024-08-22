@@ -35,7 +35,6 @@ export default class MovieListFilter extends LightningElement {
 
     async handleFilterClick(event) {
         try {
-            // Ensure selectedGenre and selectedLimit are valid
             if (!this.selectedGenre || this.selectedGenre === 'No genre') {
                 this.selectedGenre = 'All';
             }
@@ -45,7 +44,6 @@ export default class MovieListFilter extends LightningElement {
     
             console.log('Filtering with Genre:', this.selectedGenre, 'and Limit:', this.selectedLimit);
     
-            // Dispatch the filter event with the genre and limit details
             const filterEvent = new CustomEvent('filter', {
                 detail: { genre: this.selectedGenre, limit: this.selectedLimit }
             });

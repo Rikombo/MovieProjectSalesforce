@@ -18,7 +18,7 @@ export default class MovieLoader extends LightningElement {
                     this.showToast('Success', result, 'success');
                 })
                 .catch(error => {
-                    console.error('Apex error:', error); // Log the error for debugging
+                    console.error('Apex error:', error); 
                     this.showToast('Error', 'Error loading records: ' + (error.body ? error.body.message : error.message), 'error');
                 });
         } else {

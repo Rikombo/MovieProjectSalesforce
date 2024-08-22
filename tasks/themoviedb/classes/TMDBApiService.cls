@@ -4,7 +4,6 @@ public with sharing class TMDBApiService {
     private static final String BASE_URL = 'https://api.themoviedb.org/3/movie/';
     private static final String BEARER_TOKEN = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5Yjk1ZGFhOWZjYTUzYTgzYTZkZDIwMGIzYjY5YTY4NSIsIm5iZiI6MTcyMzQ1MTg5MC4xMTUwMDMsInN1YiI6IjY2YjljMDdhNmY5Y2I0ZTJlNjA3N2I3OSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.RJAGubnjJg8KdRkcHmHjPtbnhID06wpfw_oKjmXY5X0';
 
-    // Fetches detailed movie information using TMDB movie ID
     public static Map<String, Object> fetchMovieDetailsFromTMDB(String tmdbId) {
         String endpoint = BASE_URL + tmdbId + '?language=en-US';
         HttpRequest request = new HttpRequest();
@@ -81,7 +80,6 @@ public with sharing class TMDBApiService {
                     }
                 }
     
-                // If genreNames is empty, assign 'No genre', otherwise join the genres
                 String genres = genreNames.isEmpty() ? 'No genre' : String.join(genreNames, ', ');
     
                 movies.add(new Map<String, Object>{
@@ -97,6 +95,38 @@ public with sharing class TMDBApiService {
             return movies;
         } else {
             throw new AuraHandledException('Failed to fetch movies from TMDB: ' + response.getStatusCode());
+        }
+    }
+
+    @AuraEnabled(cacheable=true)
+    public static List<Map<String, Object>> fetchReviews(String tmdbId) {
+        String endpoint = BASE_URL + tmdbId + '/reviews?language=en-US';
+        HttpRequest request = new HttpRequest();
+        request.setEndpoint(endpoint);
+        request.setMethod('GET');
+        request.setHeader('Authorization', 'Bearer ' + BEARER_TOKEN);
+
+        Http http = new Http();
+        HttpResponse response = http.send(request);
+
+        if (response.getStatusCode() == 200) {
+            Map<String, Object> result = (Map<String, Object>) JSON.deserializeUntyped(response.getBody());
+            List<Object> reviewsList = (List<Object>) result.get('results');
+            List<Map<String, Object>> reviews = new List<Map<String, Object>>();
+
+            for (Object reviewObj : reviewsList) {
+                Map<String, Object> review = (Map<String, Object>) reviewObj;
+                reviews.add(new Map<String, Object>{
+                    'id' => review.get('id'),
+                    'author' => review.get('author'),
+                    'content' => review.get('content'),
+                    'created_at' => review.get('created_at')
+                });
+            }
+
+            return reviews;
+        } else {
+            throw new AuraHandledException('Failed to fetch reviews from TMDB: ' + response.getStatusCode());
         }
     }
     
