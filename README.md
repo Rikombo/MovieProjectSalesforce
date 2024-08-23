@@ -133,4 +133,11 @@ Key features include:
 
 ## Screenshots
 
+### Movie Catalog
+![Movie Catalog](images/MovieCatalog.png)
 
+### Movie Loader
+![Movie Loader](images/MovieLoader.png)
+
+### Reviews Section
+![Reviews Section](images/ReviewsSimilarMovies.png)
