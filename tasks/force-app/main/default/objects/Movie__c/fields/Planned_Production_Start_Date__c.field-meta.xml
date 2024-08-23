@@ -3,6 +3,7 @@
     <fullName>Planned_Production_Start_Date__c</fullName>
     <label>Planned Production Start Date</label>
     <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
     <trackTrending>false</trackTrending>
     <type>Date</type>
 </CustomField>

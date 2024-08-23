@@ -1,0 +1,19 @@
+<template>
+    <template if:true={reviews}>
+        <div class="reviews-container">
+            <template for:each={reviews} for:item="review">
+                <div key={review.id} class="review-card">
+                    <div class="review-header">
+                        <span>{review.author}</span> - <span>{review.created_at}</span>
+                    </div>
+                    <div class="review-content">{review.content}</div>
+                </div>
+            </template>
+        </div>
+    </template>
+    <template if:true={error}>
+        <div class="error-message">
+            {error}
+        </div>
+    </template>
+</template>

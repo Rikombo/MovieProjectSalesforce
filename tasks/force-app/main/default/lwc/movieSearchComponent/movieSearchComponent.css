@@ -1,0 +1,71 @@
+.movie-card {
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    background-color: white;
+    padding: 10px;
+}
+
+.movie-header {
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.movie-details {
+    display: flex;
+    flex-direction: column;
+    padding-top: 10px;
+}
+
+.movie-poster img {
+    width: 100%;
+    max-width: 150px;
+    border-radius: 8px;
+}
+
+.movie-overview {
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.movie-rating,
+.movie-genre {
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.copy-movie-button {
+    background-color: #0070d2;
+    color: white;
+    border: none;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.copy-movie-button:hover {
+    background-color: #005bb5;
+}
+
+.status-success {
+    color: green;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.status-error {
+    color: red;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.accordion-icon {
+    transition: transform 0.2s ease-in-out;
+}
+
+.accordion-icon.open {
+    transform: rotate(90deg);
+}

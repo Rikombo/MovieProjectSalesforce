@@ -1,0 +1,24 @@
+<template>
+    <div class="movie-catalog-container">
+        <template for:each={paginatedMovies} for:item="movie">
+            <c-movie-card 
+                key={movie.Id}
+                title={movie.Title__c}
+                genre={movie.Genre__c}
+                rating={movie.Rating__c}
+                poster-url={movie.Poster_URL__c}
+                record-id={movie.Id}>
+            </c-movie-card>
+        </template>
+    </div>
+
+    <div class="pagination-controls">
+        <button class="pagination-button" onclick={handlePreviousPage} disabled={isPreviousDisabled}>
+            Previous
+        </button>
+        <span class="page-info">Page {currentPage} of {totalPages}</span>
+        <button class="pagination-button" onclick={handleNextPage} disabled={isNextDisabled}>
+            Next
+        </button>
+    </div>
+</template>
