@@ -136,8 +136,10 @@ Key features include:
 ### Movie Catalog
 ![Movie Catalog](images/MovieCatalog.png)
 
+### Reviews Section
+![Reviews Section](images/ReviewsSimilarMovies.png)
+
 ### Movie Loader
 ![Movie Loader](images/MovieLoader.png)
 
-### Reviews Section
-![Reviews Section](images/ReviewsSimilarMovies.png)
+
