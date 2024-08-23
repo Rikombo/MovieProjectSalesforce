@@ -103,6 +103,86 @@
                 <identifier>RecordRating_Calculated_cField</identifier>
             </fieldInstance>
         </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Cast_Count__c</fieldItem>
+                <identifier>RecordCast_Count__cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Script_Number_of_Actors__c</fieldItem>
+                <identifier>RecordScript_Number_of_Actors__cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.TMDB_ID__c</fieldItem>
+                <identifier>RecordTMDB__cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.TMDBSyncDate__c</fieldItem>
+                <identifier>RecordTMDBSync__cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.LegacyId__c</fieldItem>
+                <identifier>RecordLegacyId__cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Actual_Budget__c</fieldItem>
+                <identifier>RecordActual_Budget__cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.ErrorMessage__c</fieldItem>
+                <identifier>RecordErrorMessage__cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.FaultyJson__c</fieldItem>
+                <identifier>RecordFaultyJson__cField</identifier>
+            </fieldInstance>
+        </itemInstances>
         <name>Facet-8c2fadcb-112a-4b70-bf9d-96613b265864</name>
         <type>Facet</type>
     </flexiPageRegions>
@@ -498,6 +578,12 @@
                 <identifier>flexipage_fieldSection5</identifier>
             </componentInstance>
         </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentName>moviePoster</componentName>
+                <identifier>c_moviePoster</identifier>
+            </componentInstance>
+        </itemInstances>
         <name>Facet-aa30cfc5-6f77-4472-b365-7b4346c99e87</name>
         <type>Facet</type>
     </flexiPageRegions>
@@ -523,6 +609,16 @@
             </componentInstance>
         </itemInstances>
         <name>Facet-5b1cb764-8b17-4935-b6e5-bc414903ab26</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentName>movieReviews</componentName>
+                <identifier>c_movieReviews</identifier>
+            </componentInstance>
+        </itemInstances>
+        <name>Facet-00bda4db-e73c-4500-aaf1-2d8da728855d</name>
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>
@@ -600,6 +696,20 @@
                 <identifier>flexipage_tab5</identifier>
             </componentInstance>
         </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>body</name>
+                    <value>Facet-00bda4db-e73c-4500-aaf1-2d8da728855d</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>title</name>
+                    <value>Reviews</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:tab</componentName>
+                <identifier>flexipage_tab6</identifier>
+            </componentInstance>
+        </itemInstances>
         <name>Facet-634cca45-8880-4195-be66-0b74afd5b90a</name>
         <type>Facet</type>
     </flexiPageRegions>
@@ -657,6 +767,12 @@
         <type>Region</type>
     </flexiPageRegions>
     <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentName>movieSearchComponent</componentName>
+                <identifier>c_movieSearchComponent</identifier>
+            </componentInstance>
+        </itemInstances>
         <mode>Replace</mode>
         <name>sidebar</name>
         <type>Region</type>

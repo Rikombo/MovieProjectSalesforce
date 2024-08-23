@@ -1,7 +1,7 @@
 <template>
-    <template if:true={reviews}>
+    <template lwc:if={reviews}>
         <div class="reviews-container">
-            <template for:each={reviews} for:item="review">
+            <template lwc:for={reviews} lwc:item="review">
                 <div key={review.id} class="review-card">
                     <div class="review-header">
                         <span>{review.author}</span> - <span>{review.created_at}</span>
@@ -11,7 +11,8 @@
             </template>
         </div>
     </template>
-    <template if:true={error}>
+
+    <template lwc:if={error}>
         <div class="error-message">
             {error}
         </div>

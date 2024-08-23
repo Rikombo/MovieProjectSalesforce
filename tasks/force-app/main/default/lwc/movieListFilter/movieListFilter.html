@@ -1,6 +1,5 @@
 <template>
     <div class="filter-container">
-        <!-- Genre Selection -->
         <lightning-combobox 
             class="genre-select"
             name="genre" 
@@ -11,7 +10,6 @@
             onchange={handleGenreChange}>
         </lightning-combobox>
 
-        <!-- Number of Movies Input -->
         <lightning-input 
             class="record-input"
             label="Number of Movies" 
@@ -21,7 +19,6 @@
             onchange={handleLimitChange}>
         </lightning-input>
 
-        <!-- Filter Button -->
         <lightning-button 
             label="Filter" 
             class="filter-button" 

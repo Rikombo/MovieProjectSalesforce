@@ -3,6 +3,7 @@
     <fullName>Poster_URL__c</fullName>
     <label>Poster URL</label>
     <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
     <trackTrending>false</trackTrending>
     <type>Url</type>
 </CustomField>

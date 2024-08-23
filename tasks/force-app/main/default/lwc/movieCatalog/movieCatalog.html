@@ -1,6 +1,6 @@
 <template>
     <div class="movie-catalog-container">
-        <template for:each={paginatedMovies} for:item="movie">
+        <template lwc:for:each={paginatedMovies} lwc:for:item="movie">
             <c-movie-card 
                 key={movie.Id}
                 title={movie.Title__c}
