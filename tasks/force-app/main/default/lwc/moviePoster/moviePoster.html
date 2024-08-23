@@ -1,11 +1,11 @@
 <template>
     <lightning-card>
-        <template lwc:if={posterUrl}>
+        <template if:true={posterUrl}>
             <div class="poster-preview">
                 <img src={posterUrl} alt="Movie Poster" />
             </div>
         </template>
-        <template lwc:else>
+        <template if:false={posterUrl}>
             <div class="no-image">
                 <p>No image info available.</p>
                 <img src="/path/to/sample-image.jpg" alt="Sample Image" />

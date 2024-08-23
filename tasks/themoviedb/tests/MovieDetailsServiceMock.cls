@@ -1,5 +1,5 @@
 @IsTest
-global class TMDBApiServiceMock implements HttpCalloutMock {
+global class MovieDetailsServiceMock implements HttpCalloutMock {
 
     private String mockResponse;
 
@@ -17,8 +17,8 @@ global class TMDBApiServiceMock implements HttpCalloutMock {
         if (mockResponse != null) {
             res.setBody(mockResponse);
         } else {
-            // Adjust the mock response to match the test expectations
-            res.setBody('{"id": 300, "original_title": "New Movie Test", "overview": "Mock Description", "vote_average": 7.5, "revenue": 1000000, "genres": [{"id": 18, "name": "Drama"}]}');
+            // Default mock response
+            res.setBody('{"id": "12345", "title": "Mock Movie Title", "overview": "Mock Description", "vote_average": 7.5, "revenue": 500000, "budget": 200000, "poster_path": "/mock_poster.jpg", "genres": [{"id": 18, "name": "Drama"}, {"id": 35, "name": "Comedy"}]}');
         }
 
         return res;

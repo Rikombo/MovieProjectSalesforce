@@ -1,7 +1,7 @@
 <template>
     <div class="movie-card">
         <div class="poster-container">
-            <template lwc:if={isHorrorMovie}>
+            <template if:true={isHorrorMovie}>
                 <div class="age-restriction">18+</div>
             </template>
             <img src={computedPosterUrl} alt="Movie Poster" class="movie-poster" />

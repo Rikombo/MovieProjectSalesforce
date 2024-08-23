@@ -17,7 +17,6 @@ public with sharing class MovieDetailsService {
         if (!movies.isEmpty()) {
             Movie__c movie = movies[0];
             
-            // Check if 'title' is null or empty, fallback to 'original_title' if necessary
             String title = (String) movieDetails.get('title');
             if (String.isBlank(title)) {
                 title = (String) movieDetails.get('original_title');
@@ -52,7 +51,7 @@ public with sharing class MovieDetailsService {
                                 genreName = 'Science_Fiction'; 
                             }
                             genreNames.add(genreName);
-                            break; // Break after finding the genre to avoid unnecessary iterations
+                            break; 
                         }
                     }
                 }
