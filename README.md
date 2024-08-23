@@ -1,92 +1,136 @@
-# tasks
+# Movie Studio Management System
+
+Welcome to the Movie Studio Management System! This project was developed as part of a bootcamp exercise to streamline various aspects of movie production management within a movie studio. Our system is built on Salesforce and is designed to help movie studios efficiently manage the complex processes of film production, budgeting, and financial tracking.
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Features](#features)
+- [Setup Instructions](#setup-instructions)
+- [Usage Guide](#usage-guide)
+- [Future Enhancements](#future-enhancements)
+- [Screenshots](#screenshots)
+- [Contributing](#contributing)
+- [License](#license)
+
+## Overview
+
+The Movie Studio Management System is a comprehensive Salesforce-based application that integrates with external APIs (like TMDB) to manage and track the entire lifecycle of movie production, from script creation to financial management and release planning.
+
+Key features include:
+
+- Budget allocation and tracking
+- Partner and cast management
+- Cost estimation based on team member rates and production timelines
+- Movie catalog with search functionality
+- External API integration for fetching movie details, reviews, and similar movies
+- Data import and sync processes to keep movie information up-to-date
+
+## Features
+
+### 1. Budget Allocation and Tracking
+- Allocate and manage the budget for each film.
+- Track financial details such as revenue, actor costs, and overall production costs.
+- Automated updates from CSV files to keep financial records current.
+
+### 2. Partner and Cast Management
+- Manage a list of partners who provide services like casting, directing, cinematography, etc.
+- Track team member availability and costs to estimate production timelines and budgets.
+
+### 3. Cost and Time Estimation
+- Estimate the costs and production time required for a movie.
+- Use script data to calculate the number of actors, locations, and production time needed.
+
+### 4. Script Management
+- Store detailed information about movie scripts, including production periods, actor requirements, and filming locations.
+- Use script data to inform budgeting and timeline planning.
+
+### 5. Financial Tracking
+- Track financial information related to each movie, such as revenue, budget, and actor costs.
+- Import financial data via CSV files to update movie records automatically.
+
+### 6. Movie Catalog and Search
+- A comprehensive movie catalog allows users to browse and search for movies by genre.
+- The catalog improves efficiency in managing and searching for movies.
+
+### 7. API Integration
+- The system integrates with external APIs (such as TMDB) to fetch movie details, reviews, and similar movies.
+- Movies not already in the database can be added via API by entering the TMDB ID.
+
+### 8. Movie Importing and Syncing
+- Movies can be imported via a movie loader from a file or by using the TMDB ID for API integration.
+- A sync scheduler is available to periodically update movie information from the API.
+- The Movie Batch process updates movie information, ensuring that all records are current.
+
+## Setup Instructions
+
+### Prerequisites
+- Salesforce DX (SFDX) CLI installed
+- A Salesforce Developer Org
+- Visual Studio Code with Salesforce extensions
+
+### Step-by-Step Setup
+
+1. **Clone the repository**: 
+    ```bash
+    git clone <repository-url>
+    cd movie-studio-management-system
+    ```
+
+2. **Authorize your Salesforce org**: 
+    ```bash
+    sfdx auth:web:login -a my-org-alias
+    ```
+
+3. **Deploy the project to your org**: 
+    ```bash
+    sfdx force:source:deploy -p force-app
+    ```
+
+4. **Assign Permission Sets**:
+    - Assign the necessary permission sets to your user:
+    ```bash
+    sfdx force:user:permset:assign -n Movie_Studio_Permissions
+    ```
+
+5. **Import Sample Data**:
+    - Load initial data into your Salesforce org using the provided data files.
+    ```bash
+    sfdx force:data:tree:import -p data/plan.json
+    ```
+
+6. **Run Tests**:
+    - Validate the deployment by running all tests to ensure that everything is functioning as expected:
+    ```bash
+    sfdx force:apex:test:run --resultformat human --testlevel RunLocalTests
+    ```
+
+7. **Set Up Experience Cloud (Optional)**:
+    - To migrate the application to Experience Cloud for external access, follow Salesforce’s Experience Cloud setup guide and deploy the necessary components.
+
+## Usage Guide
+
+### Movie Catalog
+- Navigate to the "Movies" tab in the Salesforce app to access the movie catalog.
+- Use the genre filter to search for movies by specific genres.
+- Click on a movie to view details, reviews, similar movies, and other related information.
+
+### Movie Loader
+- Use the "Movie Loader" component to add new movies from a file or by entering a TMDB ID.
+- You can import multiple movies at once via a CSV file or sync movie details using the sync scheduler.
+
+### Reviews and Similar Movies
+- Fetch movie reviews and similar movies directly from the TMDB API by navigating to a movie’s details page.
+
+### Sync Scheduler
+- The sync scheduler periodically updates movie information, ensuring that all records are up-to-date with the latest data from the API.
+
+## Future Enhancements
+
+- **Trailer Tab**: Implement a trailer tab on the movie record details page to embed trailers for each movie.
+- **Experience Cloud Migration**: Migrate the application to Salesforce Experience Cloud for external-facing access, enabling partners and external users to interact with the movie catalog.
+- **Enhanced Reporting**: Develop custom reports and dashboards to provide insights into production timelines, budget usage, and revenue forecasting.
+
+## Screenshots
 
 
-
-## Getting started
-
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
-
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
-
-## Add your files
-
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
-
-```
-cd existing_repo
-git remote add origin https://cbox.ideaportriga.lv/salesforce/training/salesforce-bootcamp-2023/tasks.git
-git branch -M main
-git push -uf origin main
-```
-
-## Integrate with your tools
-
-- [ ] [Set up project integrations](https://cbox.ideaportriga.lv/salesforce/training/salesforce-bootcamp-2023/tasks/-/settings/integrations)
-
-## Collaborate with your team
-
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Set auto-merge](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
-
-## Test and Deploy
-
-Use the built-in continuous integration in GitLab.
-
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
-
-***
-
-# Editing this README
-
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thank you to [makeareadme.com](https://www.makeareadme.com/) for this template.
-
-## Suggestions for a good README
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
-## Name
-Choose a self-explaining name for your project.
-
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
-
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
-
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
-
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
-
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
-
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
-
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
-
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
-
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
-
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
-
-## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
