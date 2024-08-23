@@ -32,31 +32,23 @@ Key features include:
 - Track financial details such as revenue, actor costs, and overall production costs.
 - Automated updates from CSV files to keep financial records current.
 
-### 2. Partner and Cast Management
-- Manage a list of partners who provide services like casting, directing, cinematography, etc.
-- Track team member availability and costs to estimate production timelines and budgets.
-
-### 3. Cost and Time Estimation
-- Estimate the costs and production time required for a movie.
-- Use script data to calculate the number of actors, locations, and production time needed.
-
-### 4. Script Management
+### 2. Script Management
 - Store detailed information about movie scripts, including production periods, actor requirements, and filming locations.
 - Use script data to inform budgeting and timeline planning.
 
-### 5. Financial Tracking
+### 3. Financial Tracking
 - Track financial information related to each movie, such as revenue, budget, and actor costs.
 - Import financial data via CSV files to update movie records automatically.
 
-### 6. Movie Catalog and Search
+### 4. Movie Catalog and Search
 - A comprehensive movie catalog allows users to browse and search for movies by genre.
 - The catalog improves efficiency in managing and searching for movies.
 
-### 7. API Integration
+### 5. API Integration
 - The system integrates with external APIs (such as TMDB) to fetch movie details, reviews, and similar movies.
 - Movies not already in the database can be added via API by entering the TMDB ID.
 
-### 8. Movie Importing and Syncing
+### 6. Movie Importing and Syncing
 - Movies can be imported via a movie loader from a file or by using the TMDB ID for API integration.
 - A sync scheduler is available to periodically update movie information from the API.
 - The Movie Batch process updates movie information, ensuring that all records are current.
