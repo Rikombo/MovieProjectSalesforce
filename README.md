@@ -10,8 +10,7 @@ Welcome to the Movie Studio Management System! This project was developed as par
 - [Usage Guide](#usage-guide)
 - [Future Enhancements](#future-enhancements)
 - [Screenshots](#screenshots)
-- [Contributing](#contributing)
-- [License](#license)
+
 
 ## Overview
 
