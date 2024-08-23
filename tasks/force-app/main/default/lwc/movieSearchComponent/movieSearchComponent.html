@@ -1,0 +1,32 @@
+<template>
+    <template if:true={movies}>
+        <template for:each={movies} for:item="movie" for:index="index">
+            <div key={movie.id} class="movie-card">
+                <div class="movie-header" data-index={index} onclick={toggleAccordion}>
+                    <span>{movie.title}</span>
+                    <span class={movie.accordionIconClass}></span>
+                </div>
+                <template if:true={movie.isOpen}>
+                    <div class="movie-details">
+                        <div class="movie-poster">
+                            <img src={movie.posterUrl} alt={movie.title} />
+                        </div>
+                        <div class="movie-overview">{movie.overview}</div>
+                        <div class="movie-rating">Rating: {movie.rating}</div>
+                        <div class="movie-genre">Genre: {movie.genre}</div> <!-- This will display "No genre" if empty -->
+                        <div class={movie.statusClass}>{movie.statusMessage}</div>
+                        <template if:false={movie.existsInDb}>
+                            <button
+                                data-id={movie.id}
+                                data-index={index}
+                                onclick={handleCopyMovie}
+                                class="copy-movie-button">
+                                Copy Movie
+                            </button>
+                        </template>
+                    </div>
+                </template>
+            </div>
+        </template>
+    </template>
+</template>

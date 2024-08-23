@@ -72,6 +72,12 @@
                 <identifier>RecordGenre_cField</identifier>
             </fieldInstance>
         </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldItem>Record.LegacyId__c</fieldItem>
+                <identifier>RecordLegacyId__cField</identifier>
+            </fieldInstance>
+        </itemInstances>
         <name>Facet-414e89dd-13ae-431d-9bba-b8529abf03fd</name>
         <type>Facet</type>
     </flexiPageRegions>

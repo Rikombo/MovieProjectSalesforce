@@ -57,6 +57,26 @@
                 <identifier>RecordAccountPhoneField</identifier>
             </fieldInstance>
         </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Email</fieldItem>
+                <identifier>RecordEmailField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Role__c</fieldItem>
+                <identifier>RecordRole_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
         <name>Facet-75b69309-de5e-41da-b629-9ae8dc352276</name>
         <type>Facet</type>
     </flexiPageRegions>
@@ -121,13 +141,6 @@
                 </fieldInstanceProperties>
                 <fieldItem>Record.Price_Per_Hour__c</fieldItem>
                 <identifier>RecordPrice_Per_Hour_cField</identifier>
-                <visibilityRule>
-                    <criteria>
-                        <leftValue>{!Record.Role__c}</leftValue>
-                        <operator>EQUAL</operator>
-                        <rightValue>Actor</rightValue>
-                    </criteria>
-                </visibilityRule>
             </fieldInstance>
         </itemInstances>
         <name>Facet-175a8123-37f5-4442-bacb-aee4aa7b9840</name>
@@ -234,13 +247,6 @@
                 </componentInstanceProperties>
                 <componentName>flexipage:fieldSection</componentName>
                 <identifier>flexipage_fieldSection2</identifier>
-                <visibilityRule>
-                    <criteria>
-                        <leftValue>{!Record.Role__c}</leftValue>
-                        <operator>EQUAL</operator>
-                        <rightValue>Actor</rightValue>
-                    </criteria>
-                </visibilityRule>
             </componentInstance>
         </itemInstances>
         <itemInstances>

@@ -1,0 +1,23 @@
+.poster-preview {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.poster-preview img {
+    max-width: 50%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.no-image {
+    text-align: center;
+    padding: 20px;
+}
+
+.no-image img {
+    max-width: 150px;
+    height: auto;
+    opacity: 0.5;
+}
